@@ -18,8 +18,9 @@
         titlepage = false, abstract = true}
 \usepackage{times}
 \usepackage{lipsum}
-
+\usepackage{amsmath}
 \usepackage{indentfirst}
+
 
 \title{How to optimize passenger throughout}
 \author{Dingcheng Guo \\ Yuchen Lu \\ Jiawen Wu}
@@ -27,6 +28,7 @@
  %{\includegraphics[width=7cm]{mcmthesis-logo}}}
 \date{\today}
 \begin{document}
+\numberwithin{equation}{section}
 \begin{abstract}
 
 \begin{keywords}
@@ -88,8 +90,14 @@ from \eqref{aa} we have
 
 
 \section{Calculating and Simplifying the Model}%3
+\subsection{The current process for a US airport security checkpoint}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{airport.jpg}
+  \caption{Airport}\label{fig:digit}
+\end{figure}
 
-\subsection{The Analysis of The Passengers Queueing Theory}%3.1
+\subsection{The Analysis of The Passengers Queueing Theory}
 		Since the arrival of the passengers and the sercuity check for every passengers is random, the passenger sercuity check system is a typically random service system. This system has the following characteristics:
 			\begin {enumerate}
 				\item Those who need sercuity check are those who want to get aboard. The number of passengers are infinite. The arrival time of each passenger is independent and the distribution of service time is also random.
@@ -122,7 +130,7 @@ in where $o(\Delta t)$ means the high order infinitesimal of $\Delta t$ as $\Del
 \sum\limits_{n=2}^\infty P_n(t,t+\Delta t)=o(\Delta t)   \label{e3}
 \end{equation}
 
-from \eqref{e2} and  \eqref{e3} we have the probability of the  passengers don't arrive at $[t,t+\Delta t)$ is shown as below.
+From equations \eqref{e2} and  \eqref{e3} we have the probability of the  passengers don't arrive at $[t,t+\Delta t)$ is shown as below.
 
 \begin{equation}
 P_0(t,t+\Delta t)=1-\lambda \Delta t+o(\Delta t)
@@ -157,7 +165,7 @@ when$n=0$,we have,
 \end{equation}
 
 
-By solving \eqref{e6} and \eqref{e7},we get,
+By solving equations \eqref{e6} and \eqref{e7} ,we get,
 \begin{equation}
  P_n(t)=\frac{(\lambda t)^n}{n!} e^{-\lambda t}\qquad t>0\, , n=0,1,2,\cdots
 \end{equation}
@@ -199,6 +207,24 @@ which can be rewritten as
 
 
 Hence, the time of arrival of passengers is independent of each other and is a negative exponential distribution.The input process is equivalent to the Poisson distribution.
+
+	Based on the basic knowledgee about the queueing theory, we can make these assumptions about the passengers queueing model.
+		\begin{enumerate}
+			\item Arrival process
+			
+			 The arrival of passengers are random, and successive customers arrive after intervals which independently are exponentially distributed. So we assume that the arrival of pessagers is subject to a Poisson distribution with the average arrival rate ${\lambda}$.
+			\item The behavior of passengers 
+			
+			 We assume that passengers are patient and willing to wait for a long time.
+			\item The service discipline 
+			
+			 Passengers will be served one by one when taking sercurity check. We have various scheduling policies that can be used in this situation and we choose ``First in first out'' ,which is most commonly used in our daily life, as our principle.
+			\item The service capacity 
+			
+			 In the sercuity checkpoints, we find that Zone A is a system where there exist only one server, and Zone B and Zone C are the systems with a group of servers helping the passengers.
+		\end{enumerate}	
+		
+	So, we assume that the sercurity checkpoint is such a system consisting of a subsystem with only one server, called M/M/1 queue, and another subsystem with several servers, called M/M/c queue.
 
 	\subsection{Model of The Arrival of Pasengers} \label{flag1.1} %3.3
 		Maximum likelihood estimation (MLE) is a method of estimating the parameters of a statistical model given observations, by finding the parameter values that maximize the likelihood of making the observations given the parameters. 
