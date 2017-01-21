@@ -21,7 +21,7 @@
 \usepackage{amsmath}
 \usepackage{indentfirst}
 \usepackage{makecell}
-
+%\setlength\parindent{0em}
 
 
 \title{How to optimize passenger throughout}
@@ -78,14 +78,14 @@ By retaining the basic skeleton frame of traditional M/M/s queue model, we add a
 \section{Terminology and Symbol Description}%%%%%%%%%%%%%%%%%
 \subsection{Terminology}
 \begin{itemize}
-	\item M/M/1
-	\item M/M/c
+	\item {\bf M/M/1}\qquad The M/M/1 queue represents the queue length in a system having a single server, where arrivals are determined by a Poisson process and job service times have an exponential distribution.
+	\item {\bf M/M/c}\qquad The M/M/c queue is a multi-server queueing model.It describes a system where arrivals form a single queue and are governed by a Poisson process, there are c servers and job service times are exponentially distributed.
 \end{itemize}
-\subsection{}
+\subsection{Symbol Description}
 
 \begin{table}[h]
 \centering
-\setlength{\belowcaptionskip}{12pt}
+\setlength{\belowcaptionskip}{15pt}
  \caption{ Parameters Table}
 \label{tab:righttable}
 \begin {tabular}{c!{\vrule width1.2pt}l}
@@ -106,26 +106,32 @@ $\lambda$  &\qquad The average number of passengers arriving per unit time      
 \section{Analysis of the Model}%4
 
 \subsection{The current process for a US airport security checkpoint}%%%%%
-In modern society, accumulating number of people would like to use airplane as the way of transport. The security of people in plane plays a significant part in an airline company. Here is a picture about current process of airport checkpoints.
+In modern society, accumulating number of people would like to use airplane as the way of transport. The security of people in plane plays a significant part in an airline company. Here is a picture about current process of airport check in Figure \ref{digit}.
 
-\begin{figure}[htbp]  \label{fig:arch}
-  \centering
-  \includegraphics[width=0.68\textwidth]{checkpoints.jpg}
-  \caption{Checkpoints}\label{fig:digit}
-\end{figure}
-In order to simplify the check process to set the model. We assume the routine of check like: \ref{fig:arch}
-\begin{figure}[htbp]
+
+\begin{figure}[htbp]  
   \centering
   \includegraphics[width=0.85\textwidth]{airport.jpg}
-  \caption{Airport}\label{fig:digit}
+  \caption{Check process in real life}
+\label{digit}
+\end{figure}
+
+
+In order to simplify the check process to set the model. We assume the routine of check like the Figure\ref{arch} 
+
+\begin{figure}[htbp]   
+  \centering
+  \includegraphics[width=0.68\textwidth]{checkpoints.jpg} 
+  \caption{Check process simplified model}
+   \label{arch}
 \end{figure}
 
 \subsection{System Model Assumption}%%%%%
 Before we obtain the model assumption, we need to determine which distribution the system input and service process subject to. We assume the theoretical distributions of system input and service process are Poission Distribution and Negative Exponential Distribution.
 \subsection{Traditional Model}%%%%%
 \subsubsection{Fundamental Analysis}%%%%%
-\paragraph{(I) Poission  Distribution}%%%%%
-we set $ N(t) $ to represent the number of passengers'  arrival in $ [0,t)(t>0) $ and $ P_n(t_1,t_2) $
+\par{\bf I. Poission  Distribution}%%%%%
+\par we set $ N(t) $ to represent the number of passengers'  arrival in $ [0,t)(t>0) $ and $ P_n(t_1,t_2) $
 to represent the probability of $ n(n\geqslant 0) $ passengers'  arrival  in $ [t_1,t_2)(t_2>t_1) $. Hence,we obtain,
 
 \begin{equation}
@@ -189,8 +195,8 @@ By solving equations \eqref{e6} and \eqref{e7} ,we get,
 \end{equation}
 
 
-\paragraph{(II) Negative Exponential Distribution}%%%%%%
-If the probability density function of random variables T is shown as below.
+\par{\bf II. Negative Exponential Distribution}%%%%%%
+\par If the probability density function of random variables T is shown as below.
 \begin{equation}    
 f_T(t)=\left  \{
        \begin{array}{lr}
@@ -242,8 +248,8 @@ Hence, the time of arrival of passengers is independent of each other and is a n
 			 In the sercuity checkpoints, we find that Zone A is a system where there exist only one server, and Zone B and Zone C are the systems with a group of servers helping the passengers.
 		\end{enumerate}	
 
-	\paragraph{(III) Model of The Arrival of Pasengers} \label{flag1.1} %%%%%%
-		Maximum likelihood estimation (MLE) is a method of estimating the parameters of a statistical model given observations, by finding the parameter values that maximize the likelihood of making the observations given the parameters. 
+	\par{\bf III. Model of The Arrival of Pasengers} \label{flag1.1} %%%%%%
+		\par Maximum likelihood estimation (MLE) is a method of estimating the parameters of a statistical model given observations, by finding the parameter values that maximize the likelihood of making the observations given the parameters. 
 
 		Suppose there is a sample ${X_1,X_2,\dots,X_n}$ for which the probability density (or mass) function of each ${X_i}$ is ${f(x_i;\theta)}$.  Then, the joint probability mass (or density) function of ${X_1,X_2,\dots,X_n}$, which we'll call ${L(\theta)}$ is:
 			\begin{gather}
@@ -282,8 +288,8 @@ Hence, the time of arrival of passengers is independent of each other and is a n
 			\begin{equation}
 				\hat \lambda = \frac{1}{n} \sum_{i=1}^{n}X_i = \overline X
 			\end{equation}
-		\paragraph{(IV) Models of service time}%%%%%%
-		As only one passenger can be check at one time in Zone A, and service time is independent for each passenger, so we assume that the service time at Zone A is subject to negative exponential distribution. Similarly, we can also assume that the service time in Zone B and Zone C is also subject to negative exponential distribution. As mentioned above, we use maximum likelihood estimation to estimate the unknown parameter ${\mu}$.
+		\par{\bf IV. Models of service time}%%%%%%
+		\par As only one passenger can be check at one time in Zone A, and service time is independent for each passenger, so we assume that the service time at Zone A is subject to negative exponential distribution. Similarly, we can also assume that the service time in Zone B and Zone C is also subject to negative exponential distribution. As mentioned above, we use maximum likelihood estimation to estimate the unknown parameter ${\mu}$.
 		We assume that the overall sample is subject to negative exponential distribution, or
 			\begin{equation}    
 				f(t)=\left  \{
@@ -312,8 +318,8 @@ Hence, the time of arrival of passengers is independent of each other and is a n
 			\end{equation}		
 			
 	\subsubsection{Models of the sercurity check system}%%%%%%
-		\paragraph{(I) M/M/1 Queue}%%%%%
-			The M/M/1 queue is a simple model where a single server serves jobs that arrive according to a Poisson process and have exponentially distributed service requirements. 
+		\par{\bf i. M/M/1 Queue}%%%%%
+			\par The M/M/1 queue is a simple model where a single server serves jobs that arrive according to a Poisson process and have exponentially distributed service requirements. 
 			
 			Let ${E}$ represnt the number of times of entering state ${n}$, and ${L}$ represent the number of times of leaving state ${n}$. We have ${|E - L| \in \{0,1\}}$. When the system arrives at steady state, which means ${t}$, we have, therefore arrival rate = removed rate.
 			
@@ -373,8 +379,8 @@ Hence, the time of arrival of passengers is independent of each other and is a n
 					\right.
 				\end{equation}
 
-	\paragraph{(II) M/M/c queue }%%%%%
-Now we set there are c$(c\geqslant 2)$ windows work independently. Passengers would like  to go to the free windows. If there are all busy,than wait until there is a free window.
+	\par{\bf ii. M/M/c queue }%%%%%
+\par Now we set there are c$(c\geqslant 2)$ windows work independently. Passengers would like  to go to the free windows. If there are all busy,than wait until there is a free window.
 In M/M/c ,we have 
  
 \begin{equation}    
@@ -434,13 +440,59 @@ Finally, the average response time and average time spend waitting can be writte
 \subsection{Improvements on previous model}
 	It is obvious that the system in previous model will gradually become extremly crowded with the growing number of passengers. To improve this situation, we have made some modifications on our previous model. 
 	\begin{enumerate}
-		\item Increase the percentage and the number of the pre-check lane. For example, we can open two or more pre check lanes for every five sercurity checkpoints. From the results we obtain, pre-check system will be much more crowded than regular ones, it is necessary to have more pre-check lanes with more people willing to take pre-check program.
-		\item Another way to improve our model is to set a upper limits for the number of the passengers waiting in the queue. This is to say that when the number of the people in the queue is more than the limits, the following will not be allowed to get into the queue until someone have been scanned properly.
-	\end{enumerate}
-	
-	Then, we take the two modifications into consideration to analyze its feasibility.
+		\item Increase the number of the pre-check lane. For example, we can open two or more pre check lanes for every five sercurity checkpoints. From the results we obtain, pre-check system will be much more crowded than regular ones, it is necessary to have more pre-check lanes with more people willing to take pre-check program.
+\par First, we take into consideration the action that we increase the percentage and the number of the pre-check lane.we set  $\xi $ as the correction factor, which can be affected by the number of the pre-checked lanes.
+	  \par  we  define,
+             \begin{equation}
+                \xi=\frac{N_p}{N_t}
+              \end{equation}
+in where the $N_p$ is the number of pre-checks and $N_t$ is the total number of the checkpoints. 
 
-Then, we take into consideration the second modification. Define ${N}$ as the upper limits of the number of the people in the queue. The way to analyze this system is similar to the way mentioned above.
+\par Hence,by considering the parameter $\xi$ ,  the above model could be rebuild as follow.
+ \par  {\bf i. M/M/1 Queue model*}
+  \par we can rewrite the \ref{eq1} as
+                
+				\begin{equation}    
+					\left  \{
+       						\begin{array}{lr}
+			 				L_q = (1-\xi)\frac {\rho ^2}{1-\rho}\\ % \label{eq4.34}
+							L_s = (1-\xi)\frac{\rho}{1 - \rho}
+  					      \end{array}
+					\right.
+				\end{equation}
+			 In the same way,we can rewrite the \ref{eq2} as
+				\begin{equation}    
+					\left  \{
+       						\begin{array}{lr}
+       							W_s = (1-\xi)\frac{1}{\mu - \lambda}\\  % \label{eq4.35}
+       							W_q = (1-\xi)\frac{\lambda}{\mu (\mu - \lambda)}
+  					      \end{array}
+					\right.
+				\end{equation}
+
+  \par  {\bf ii. M/M/c Queue model*}
+\par we can rewrite the \ref{eq4} as
+    \begin{equation}    
+\left  \{
+       \begin{array}{lr}
+           L_s=(1-\xi)\frac{\rho ^2\rho_c}{c!(1-\rho_c)^2}P_0 +(1-\xi)\rho \\ \label{eq4.35}
+          L_q=(1-\xi)\frac{\rho ^2\rho_c}{c!(1-\rho_c)^2}P_0 
+        \end{array}
+\right.
+\end{equation}
+
+ In the same way,we can rewrite the \ref{eq2} as
+\begin{equation}    
+\left  \{
+       \begin{array}{lr}
+           W_s=(1-\xi)\frac{\rho ^2\rho_c}{c!(1-\rho_c)^2}P_0 +(1-\xi)\rho \\ \label{eq4.36}
+          W_q=(1-\xi)\frac{\rho ^2\rho_c}{c!(1-\rho_c)^2}P_0 
+        \end{array}
+\right.
+\end{equation}
+
+		\item Another way to improve our model is to set a upper limits for the number of the passengers waiting in the queue. This is to say that when the number of the people in the queue is more than the limits, the following will not be allowed to get into the queue until someone have been scanned properly.
+       \par Then, we take into consideration the second modification. Define ${N}$ as the upper limits of the number of the people in the queue. The way to analyze this system is similar to the way mentioned above.
 	
 	When there are ${N}$ people in this system, we obtain
 		\begin{equation}
@@ -496,6 +548,12 @@ W_s = \frac{L_s}{\mu (1 - P_0)}
 W_q = W_s - \frac{1}{\mu}
 \end{equation}
 
+	\end{enumerate}
+	%\par Then,we take the two modifications into consideration to analyze its feasibility.
+	
+	%Then, we take into consideration the second modification. Define 
+
+
 
 
 
@@ -515,6 +573,8 @@ W_q = W_s - \frac{1}{\mu}
 
 \section{Conclusions}%6
 
+
+\section{A Summary}%7
 
 \section{Evaluate of the Mode}%8
 
