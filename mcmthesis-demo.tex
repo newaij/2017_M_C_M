@@ -20,12 +20,13 @@
 \usepackage{lipsum}
 \usepackage{amsmath}
 \usepackage{indentfirst}
+\usepackage{makecell}
+
 
 
 \title{How to optimize passenger throughout}
 \author{Dingcheng Guo \\ Yuchen Lu \\ Jiawen Wu}
-%\author{\small \href{http://www.baidu.com/}
- %{\includegraphics[width=7cm]{mcmthesis-logo}}}
+
 \date{\today}
 \begin{document}
 \numberwithin{equation}{section}
@@ -43,70 +44,87 @@ Following the terrorist attacks in the US on September 11, 2001, airport securit
 
 In 2016, the U.S. Transportation Security Agency (TSA) came under sharp criticism for extremely long lines, in particular at Chicago's O'Hare international airport. Following this public attention, the TSA invested in several modifications to their checkpoint equipments and procedures and increased staffing in the more highly congested airports. While these modifications were somewhat successful in reducing waiting times, no one konws how much cost the TSA incurred to implement the new measures and increase staffing. In addition to the issues at O'Hare, there have also been accidents of unexplained and unpredicted long lines at other airports, including airports that normally have short wait times. This high variance in checkpoint lines can be extremely costly to passengers as they decide between arriving unnecessarily early or potentially missing their scheduled flight. 
 
+\subsection{Overview of Model}%1.2
+\subsubsection{Previous Research}
+There are a large number of tangible and intangible daily queues and crowded phenomenon, such as passenger ticket queue, the busy telephone lines and so on. The basic idea of Queuing Theory began to form in 1909, when Danish mathematician, scientist, engineer A.K. Erlang was looking for the solution of automatic telephone design problems, it was known as traffic theory. Inspired by thermodynamic statistical balance theory, he successfully established the telephone statistical equilibrium model, and thus obtained a set of recursive state equation, which derived the Erlang phone loss rate formula.
+
+Since the beginning of the 20th century, the telephone system design has been applying of this formula. In the 1930s the Soviet mathematician Xinqin called the balance of the telephone call flow as the simplest flow. Swedish mathematician Balm has introduced the concept of limited aftereffects and definitions. They use mathematical methods to analyze the intrinsic characteristics of telephone calls, and promote the study of queuing theory. In the early 1950s, the study of birth and death of mathematicians in the United States, the British mathematician D.G. Kendall put forward the theory of embedded Markov chain, and the classification method of queuing team type, laid the theoretical foundation for queuing theory. After that, L. Takahashi and others combined the introduction of queuing theory, making it more suitable for all types of queuing problems. Since the 1970s, people began to study the queuing network and complex queuing problem asymptotic solution, as a new trend of modern queuing theory.
+
+\subsubsection{Our Work}
+By retaining the basic skeleton frame of traditional M/M/s queue model, we add a few factors to develop the previous research. Besides, after researching the old model, we find there are some weaknesses horribly effect the previous model. Such as the problem of the relationship between the service capabilities and needs. Needs more than service capabilities and service capabilities more than needs are both bad choices for us. Therefore, in order to solve this problem, our team aim at adjusting the number of service systems to satisfy different number of passengers. Meanwhile our team define some new correction parameter(discussed in detail in 4.2 ) to improve the model results.
 
 
-\emph{center of percussion} [Brody 1986]
 
-\begin{Theorem} \label{thm:latex}
-\LaTeX
-\end{Theorem}
-\begin{Lemma} \label{thm:tex}
-\TeX .
-\end{Lemma}
-\begin{proof}
-The proof of theorem.
-\end{proof}
 
-\subsection{Other Assumptions}%1.2
+\section{General Assumptions}%2
 
 \begin{itemize}
-\item
-\item
-\item
-\item
+			\item Arrival process
+			
+			 The arrival of passengers are random, and successive customers arrive after intervals which independently are exponentially distributed. So we assume that the arrival of pessagers is subject to a Poisson distribution with the average arrival rate ${\lambda}$.
+			\item The behavior of passengers 
+					
+			 We assume that passengers are patient and willing to wait for a long time.
+			\item The service discipline 
+			
+			 Passengers will be served one by one when taking sercurity check. We have various scheduling policies that can be used in this situation and we choose ``First in first out'' ,which is most commonly used in our daily life, as our principle.
+			\item The service capacity 
+			
+			 In the sercuity checkpoints, we find that Zone A is a system where there exist only one server, and Zone B and Zone C are the systems with a group of servers helping the passengers.
 \end{itemize}
+		
+	So, we assume that the regular sercurity checkpoint is such a system consisting of two subsystems with only one server, called M/M/1 queue, and another subsystem with several servers, called M/M/c queue and that the pre-check system is a syetem with only one server.
 
+\section{Terminology and Symbol Description}%%%%%%%%%%%%%%%%%
+\subsection{Terminology}
+\begin{itemize}
+	\item M/M/1
+	\item M/M/c
+\end{itemize}
+\subsection{}
 
-
-\section{Analysis of the Problem}%2
-\begin{figure}[h]
-\small
+\begin{table}[h]
 \centering
-\includegraphics[width=12cm]{mcmthesis-aaa.eps}
-\caption{aa} \label{fig:aa}
+\setlength{\belowcaptionskip}{12pt}
+ \caption{ Parameters Table}
+\label{tab:righttable}
+\begin {tabular}{c!{\vrule width1.2pt}l}
+\bf Variables&\makecell[c]{\bf Meaning}\\
+\Xhline{1.2pt}
+$L_s$      &\qquad The average number of passengers        \\
+$L_q$      &\qquad The average number of waiting paseengers        \\
+$W_s$      & \qquad The average response time       \\
+$W_q$      & \qquad The average time spent waiting     \\
+%$T_b$                 \\
+$\mu$      &\qquad The number of passengers passing security checks per unit of time         \\
+$\lambda$  &\qquad The average number of passengers arriving per unit time          \\
+\end{tabular}
+\end{table}
+
+
+
+\section{Analysis of the Model}%4
+
+\subsection{The current process for a US airport security checkpoint}%%%%%
+In modern society, accumulating number of people would like to use airplane as the way of transport. The security of people in plane plays a significant part in an airline company. Here is a picture about current process of airport checkpoints.
+
+\begin{figure}[htbp]  \label{fig:arch}
+  \centering
+  \includegraphics[width=0.68\textwidth]{checkpoints.jpg}
+  \caption{Checkpoints}\label{fig:digit}
 \end{figure}
-
-
-\begin{equation}
-\frac{dy}{dx}=ax \label{aa}
-\end{equation}
-from \eqref{aa} we have
-
-\[
-  p_{j}=\begin{cases} 0,&\text{if $j$ is odd}\\
-  r!\,(-1)^{j/2},&\text{if $j$ is even}
-  \end{cases}
-\]
-
-
-\section{Calculating and Simplifying the Model}%3
-\subsection{The current process for a US airport security checkpoint}
+In order to simplify the check process to set the model. We assume the routine of check like: \ref{fig:arch}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.85\textwidth]{airport.jpg}
   \caption{Airport}\label{fig:digit}
 \end{figure}
 
-\subsection{The Analysis of The Passengers Queueing Theory}
-		Since the arrival of the passengers and the sercuity check for every passengers is random, the passenger sercuity check system is a typically random service system. This system has the following characteristics:
-			\begin {enumerate}
-				\item Those who need sercuity check are those who want to get aboard. The number of passengers are infinite. The arrival time of each passenger is independent and the distribution of service time is also random.
-				\item Zone A, Zone B and Zone C can be regarded as servers of this system. The servivce time for each passenger is independent.
-				\item The service discipline in this system is ``First in first out'', which states that customers are served one at a time and that the customer that has been waiting the longest is served first.
-			\end{enumerate}
-\subsection{System Model Assumption}%3.2
+\subsection{System Model Assumption}%%%%%
 Before we obtain the model assumption, we need to determine which distribution the system input and service process subject to. We assume the theoretical distributions of system input and service process are Poission Distribution and Negative Exponential Distribution.
-\subsubsection{ Poission  Distribution}
+\subsection{Traditional Model}%%%%%
+\subsubsection{Fundamental Analysis}%%%%%
+\paragraph{(I) Poission  Distribution}%%%%%
 we set $ N(t) $ to represent the number of passengers'  arrival in $ [0,t)(t>0) $ and $ P_n(t_1,t_2) $
 to represent the probability of $ n(n\geqslant 0) $ passengers'  arrival  in $ [t_1,t_2)(t_2>t_1) $. Hence,we obtain,
 
@@ -137,7 +155,7 @@ P_0(t,t+\Delta t)=1-\lambda \Delta t+o(\Delta t)
 \end{equation}
 
 
-If the process of input is Poission manifold,then we have,
+If the process of input subject to the Poission distribution,then we have,
 
 \begin{equation}
 P_n(t,t+\Delta t)=P_n(t)(1-\lambda \Delta t)+P_{n-1}(t)\lambda \Delta t+o(\Delta t) \label{e5}
@@ -171,7 +189,7 @@ By solving equations \eqref{e6} and \eqref{e7} ,we get,
 \end{equation}
 
 
-\subsubsection{Negative Exponential Distribution}
+\paragraph{(II) Negative Exponential Distribution}%%%%%%
 If the probability density function of random variables T is shown as below.
 \begin{equation}    
 f_T(t)=\left  \{
@@ -194,7 +212,7 @@ F_T(t)=\left  \{
 \right.
 \end{equation}
 
-when the  process of input is Poission manifold, the interval of passengers' arrival T subject to  negative exponential distribution. As for Poission  distribution, at least one passenger arrives at $[0,t)$  probability can  be written as
+when the  process of input subject to Poission distribution, the interval of passengers' arrival T subject to  negative exponential distribution. As for Poission  distribution, at least one passenger arrives at $[0,t)$  probability can  be written as
 
 
 \begin{equation}
@@ -206,7 +224,7 @@ which can be rewritten as
 \end{equation}
 
 
-Hence, the time of arrival of passengers is independent of each other and is a negative exponential distribution.The input process is equivalent to the Poisson distribution.
+Hence, the time of arrival of passengers is independent of each other and is a negative exponential distribution. The input process is equivalent to the Poisson distribution.
 
 	Based on the basic knowledgee about the queueing theory, we can make these assumptions about the passengers queueing model.
 		\begin{enumerate}
@@ -223,10 +241,8 @@ Hence, the time of arrival of passengers is independent of each other and is a n
 			
 			 In the sercuity checkpoints, we find that Zone A is a system where there exist only one server, and Zone B and Zone C are the systems with a group of servers helping the passengers.
 		\end{enumerate}	
-		
-	So, we assume that the sercurity checkpoint is such a system consisting of a subsystem with only one server, called M/M/1 queue, and another subsystem with several servers, called M/M/c queue.
 
-	\subsection{Model of The Arrival of Pasengers} \label{flag1.1} %3.3
+	\paragraph{(III) Model of The Arrival of Pasengers} \label{flag1.1} %%%%%%
 		Maximum likelihood estimation (MLE) is a method of estimating the parameters of a statistical model given observations, by finding the parameter values that maximize the likelihood of making the observations given the parameters. 
 
 		Suppose there is a sample ${X_1,X_2,\dots,X_n}$ for which the probability density (or mass) function of each ${X_i}$ is ${f(x_i;\theta)}$.  Then, the joint probability mass (or density) function of ${X_1,X_2,\dots,X_n}$, which we'll call ${L(\theta)}$ is:
@@ -248,7 +264,8 @@ Hence, the time of arrival of passengers is independent of each other and is a n
 			\begin{equation}
 				P(X = i) = \frac {\lambda ^ i}{i!}e^{-\lambda},i=0,1,2,\dots
 			\end{equation}
-		${X_1,X_2, \dots ,X_n}$ are samples coming from overall sample ${X}$, and ${x_1,x_2, \dots ,x_n}$ are values corresponding to the samples  ${X_1,X_2, \dots ,X_n}$. 
+		${X_1, X_2, \dots , X_n}$ are samples coming from overall sample ${X}$, and ${x_1, x_2, \dots , x_n}$ are values corresponding to the samples  ${X_1, X_2, \dots , X_n}$. 
+		
 		From equation \eqref{flag1}, we can get the likelihood function L(p) is, by definition:
 			\begin{equation}
 				L(\theta) = \prod_{i=1}^{n}P(X=x_i) = \prod_{i=1}^{n} {\frac{{\lambda}^x_i}{x_i!}}e^{-\lambda}
@@ -265,8 +282,37 @@ Hence, the time of arrival of passengers is independent of each other and is a n
 			\begin{equation}
 				\hat \lambda = \frac{1}{n} \sum_{i=1}^{n}X_i = \overline X
 			\end{equation}
-	\subsection{Models of the sercurity check system}%3.4
-		\subsubsection{M/M/1 Queue}
+		\paragraph{(IV) Models of service time}%%%%%%
+		As only one passenger can be check at one time in Zone A, and service time is independent for each passenger, so we assume that the service time at Zone A is subject to negative exponential distribution. Similarly, we can also assume that the service time in Zone B and Zone C is also subject to negative exponential distribution. As mentioned above, we use maximum likelihood estimation to estimate the unknown parameter ${\mu}$.
+		We assume that the overall sample is subject to negative exponential distribution, or
+			\begin{equation}    
+				f(t)=\left  \{
+      					 \begin{array}{lr}
+        					   \mu e^{-\mu t}\qquad t\geqslant 0\\
+         				   0\qquad\qquad t<0
+       			 		\end{array}
+				\right.
+			\end{equation}
+		${T_1, T_2, \dots , T_n}$ are samples coming from overall sample ${X}$, and ${t_1, t_2, \dots , t_n}$ are values corresponding to the samples  ${T_1, T_2, \dots , T_n}$. 
+		From equation \eqref{flag1}, we can get the likelihood function is, by definition:
+			\begin{equation}
+				L(\mu ) = \prod_{i=1}^{n} f(t_i; \theta) = \prod_{i=1}^{n}\mu e^{- \mu t_i}
+			\end{equation}
+		By taking  the natural logarithm of the likelihood function above, then
+			$${{\ln L(\mu)} = n\ln \mu - \mu \sum_{i=1}{n}t_i}$$
+		Take the partial derivative of the log likelihood with respect to ${\lambda}$,we obtain
+			$${ \frac {d \ln L(\mu)}{d \mu} = \frac {\mu}{n} -\sum_{i=1}^{n} t_i }$$
+		Let the equation above equal to zero, we get
+			\begin{equation}
+				\hat \mu = \frac{n}{\sum\limits_{i=1}^{n} t_i} = \frac {1}{ \overline t}
+ 			\end{equation}
+		Hence, the  maximum likelihood estimator is
+			\begin{equation}
+				\hat \mu = \frac{n}{\sum\limits_{i=1}^{n} T_i} = \frac {1}{ \overline T}
+			\end{equation}		
+			
+	\subsubsection{Models of the sercurity check system}%%%%%%
+		\paragraph{(I) M/M/1 Queue}%%%%%
 			The M/M/1 queue is a simple model where a single server serves jobs that arrive according to a Poisson process and have exponentially distributed service requirements. 
 			
 			Let ${E}$ represnt the number of times of entering state ${n}$, and ${L}$ represent the number of times of leaving state ${n}$. We have ${|E - L| \in \{0,1\}}$. When the system arrives at steady state, which means ${t}$, we have, therefore arrival rate = removed rate.
@@ -275,7 +321,7 @@ Hence, the time of arrival of passengers is independent of each other and is a n
 				\begin{equation}    
 					\left  \{
        						\begin{array}{lr}
-        						   - \lambda _0 P_0 + \mu _1 P_1 = 0\\
+        						   - \lambda _0 P_0 + \mu _1 P_1 = 0\
         						   \lambda _{n-1} P_{n-1} + \mu _{n+1} P_{n+1} -(\lambda _n + \mu _n ) P_n = 0,n>1
   					      \end{array}
 					\right.
@@ -284,7 +330,7 @@ Hence, the time of arrival of passengers is independent of each other and is a n
 			$${P_1 = \frac{\lambda _0}{ \mu _1}P_0 }$$
 			By mathematical induction,
 				\begin{equation}
-					P_n = \frac {\lambda _{n-1} \lambda _{n-2} \dots \lambda_0}{\mu _n \mu_{n-1} \dots \mu _1}P_0 = P_0\prod_{i=0}^{n-1} \frac{\lambda _i}{\mu _{i+1}}
+					P_n = \frac {\lambda _{n-1} \lambda _{n-2} \dots \lambda_0}{\mu _n \mu_{n-1} \dots \mu _1}P_0 = P_0\prod_{i=0}^{n-1} \frac{\lambda _i}{\mu _{i+1}}  
 				\end{equation}
 			Since ${\sum\limits_{n=0}^{ \infty } P_n = 1}$, we get
 				\begin{equation}
@@ -312,26 +358,25 @@ Hence, the time of arrival of passengers is independent of each other and is a n
 				\begin{equation}    
 					\left  \{
        						\begin{array}{lr}
-			 				L_q = \frac {\rho ^2}{1-\rho}\\
+			 				L_q = \frac {\rho ^2}{1-\rho}\\  \label{eq1}
 							L_s = \frac{\rho}{1 - \rho}
   					      \end{array}
 					\right.
 				\end{equation}
-			The average response time and the the average time spent waiting are
+			The average response time and the average time spent waiting are
 				\begin{equation}    
 					\left  \{
        						\begin{array}{lr}
-       							W_s = \frac{1}{\mu - \lambda}\\
+       							W_s = \frac{1}{\mu - \lambda}\\   \label{eq2}
        							W_q = \frac{\lambda}{\mu (\mu - \lambda)}
   					      \end{array}
 					\right.
 				\end{equation}
 
-\subsubsection{M/M/c queue }
+	\paragraph{(II) M/M/c queue }%%%%%
 Now we set there are c$(c\geqslant 2)$ windows work independently. Passengers would like  to go to the free windows. If there are all busy,than wait until there is a free window.
 In M/M/c ,we have 
  
-
 \begin{equation}    
 \left  \{
        \begin{array}{lr}
@@ -346,50 +391,130 @@ In M/M/c ,we have
 \right.
 \end{equation}
 
-We define $\rho=\frac{\lambda}{\mu}$, $\rho_c=\frac{\lambda}{c\mu}$,then we get,
-\\stationary distribution probability is shown as below
+We define $\rho=\frac{\lambda}{\mu}$, $\rho_c=\frac{\lambda}{c\mu}$,then we get the following equations.
+\\First, stationary distribution probability 
 
 \begin{equation}    
 \left  \{
        \begin{array}{lr}
-           P_0=[\sum\limits_{k=0}^{c-1}\frac{1}{k!}\rho ^k+\frac{1}{c!}\frac{1}{1-\rho}\rho ^c]^{-1}\\
+           P_0=[\sum\limits_{k=0}^{c-1}\frac{1}{k!}\rho ^k+\frac{1}{c!}\frac{1}{1-\rho}\rho ^c]^{-1}\\ \label{eq3}
             P_n=\frac{\rho ^c}{c!(1-\rho_c)}P_0
         \end{array}
 \right.
 \end{equation}
 
 
-The average number of passengers in the system and the average number of waitting passengers can write as
+Then, the average number of passengers in the system and the average number of waitting passengers can write as
 \begin{equation}    
 \left  \{
        \begin{array}{lr}
-           L_s=\frac{\rho ^2\rho_c}{c!(1-\rho_c)^2}P_0 +\rho \\
+           L_s=\frac{\rho ^2\rho_c}{c!(1-\rho_c)^2}P_0 +\rho \\ \label{eq4}
           L_q=\frac{\rho ^2\rho_c}{c!(1-\rho_c)^2}P_0 
         \end{array}
 \right.
 \end{equation}
 
-The average waitting time and average time spend waitting can be written as
+Finally, the average response time and average time spend waitting can be written as
 \begin{equation}    
 \left  \{
        \begin{array}{lr}
-           W_s=\frac{\rho ^2\rho_c}{c!(1-\rho_c)^2}P_0 +\rho \\
+           W_s=\frac{\rho ^2\rho_c}{c!(1-\rho_c)^2}P_0 +\rho \\ \label{eq5}
           W_q=\frac{\rho ^2\rho_c}{c!(1-\rho_c)^2}P_0 
         \end{array}
 \right.
 \end{equation}
 
+%		Since the arrival of the passengers and the sercuity check for every passengers is random, the passenger sercuity check system is a typically random service system. This system has the following characteristics:
+%			\begin {enumerate}
+%				\item Those who need sercuity check are those who want to get aboard. The number of passengers are infinite. The arrival time of each passenger is independent and the distribution of service time is also random.
+%				\item Zone A, Zone B and Zone C can be regarded as servers of this system. The servivce time for each passenger is independent.
+%				\item The service discipline in this system is ``First in first out'', which states that customers are served one at a time and that the customer that has been waiting the longest is served first.
+%			\end{enumerate}		
+
+\subsection{Improvements on previous model}
+	It is obvious that the system in previous model will gradually become extremly crowded with the growing number of passengers. To improve this situation, we have made some modifications on our previous model. 
+	\begin{enumerate}
+		\item Increase the percentage and the number of the pre-check lane. For example, we can open two or more pre check lanes for every five sercurity checkpoints. From the results we obtain, pre-check system will be much more crowded than regular ones, it is necessary to have more pre-check lanes with more people willing to take pre-check program.
+		\item Another way to improve our model is to set a upper limits for the number of the passengers waiting in the queue. This is to say that when the number of the people in the queue is more than the limits, the following will not be allowed to get into the queue until someone have been scanned properly.
+	\end{enumerate}
+	
+	Then, we take the two modifications into consideration to analyze its feasibility.
+
+Then, we take into consideration the second modification. Define ${N}$ as the upper limits of the number of the people in the queue. The way to analyze this system is similar to the way mentioned above.
+	
+	When there are ${N}$ people in this system, we obtain
+		\begin{equation}
+			P_N(t) = \lambda P_{N-1}(t) - \mu P_N(t)
+		\end{equation}
+	When this system arrives at steady state, letting ${\rho = \frac {\lambda}{\mu}}$, we get
+\begin{equation}    
+\left  \{
+       \begin{array}{lr}
+           P_1 = \rho P_0\\
+            P_{n+1} + \rho P_{n-1} = (1 +\rho )P_n, n=1,2,\dots,N-1\\
+            P_N = \rho P_{n-1}
+        \end{array}
+\right.
+\end{equation}
+
+	Solve the equations above under the condition where ${\sum\limits_{i=0}^{n} = 1}$ and then
+	\begin{equation}    
+\left  \{
+       \begin{array}{lr}
+            P_0 = \frac {1 - \rho}{1 - \rho ^{N+1}} , \rho \ne 1\\
+            P_N = \frac{1 - \rho}{1 - \rho ^{N+1}} \rho ^{n}
+        \end{array}
+\right.
+\end{equation}
+
+	When ${\rho = 1}$, as ${P_0 = P_1 = \dots =P_N =\frac{1}{N+1}}$, this means that when the system arrives at steady state, the phenomena that people wait in queue will not happen.
+
+	Thus the average number of passengers in the system, the average number of waiting paseengers, the average response time and the average time spent waiting are respectively:
+\begin{equation}    
+L_s = \sum\limits_{n=0}^{N} nP_n= \left  \{
+       \begin{array}{lr}
+          \frac {1}{N}, \rho = 1\\
+          \frac{\rho}{1-\rho} - \frac{(N+1) \rho^{N+1}}{1 - \rho^{N+1}} , \rho \ne 1
+        \end{array}
+\right.
+\end{equation}
+ 
+ \begin{equation}    
+L_q = \sum\limits_{n=1}^{N} (n-1)P_n= \left  \{
+       \begin{array}{lr}
+          \frac {N}{2} - \frac{N}{N+1}, \rho = 1\\
+          \frac{\rho}{1-\rho} - \frac{(N) \rho^{N+1} - \rho}{1 - \rho^{N+1}} , \rho \ne 1
+        \end{array}
+\right.
+\end{equation}
+
+\begin{equation}    
+W_s = \frac{L_s}{\mu (1 - P_0)}
+\end{equation}
+
+\begin{equation}    
+W_q = W_s - \frac{1}{\mu}
+\end{equation}
 
 
-\section{The Model Results}%4
 
 
+
+
+\section{The Model Results}%5
+	To proceed, we convert everything to second.
+
+	From the data provided in the Excel, we can obtain that in the pre-check process, the arrival of passengers is subject to a Poisson distribution with parameter ${\lambda_1 = \frac {58}{ 8 *60 + 44 } = 0.1107}$ passenger per second, and in the regular sercurity check process, the arrival of passengers is subject to a Poisson distribution with parameter ${\lambda_2 = \frac {47}{9 *60 + 56} = 0.0788}$ passenger per second. What's more, the average time of each passenger taking ID check process by one TSA officier is about 10.2 seconds, and the average time of each passenger taking ID check process by another is about 12.6 seconds, which alternatively,we can say that the first server can handle ${\mu_1 = \frac {1}{10.2} = 0.0980}$ passenger per second and the second one can handle ${\mu_2 = \frac {1}{12.6} = 0.0794}$ passenger per second. We can also get the average time of each passenger to get checked properly, which is ${\mu_3 = \frac{1}{28} = 0.0357}$ passenger per second.
+
+	We can calculate the parameters in pre-check system.As in the pre-checked process, the only thing needed to be done is to get scanned, the average proportion of time is ${\rho_1 = \frac {\lambda_1}{\mu_3} = \frac {0.1107}{0.0357} = 3.099}$. 
+	
+	We can also calculate the parameters in regular sercurity check system. The average proportion of time in one subsystem, where the first ID check to be done, is ${\rho_2 = \frac{\lambda_2}{\mu_1} = \frac {0.0788}{0.0980} = 0.8043}$. The average proportion of time in the other one is ${\rho_3= \frac{\lambda_2}{\mu_2} = \frac {0.0788}{0.7936} = 0.9936}$. And the average proportion of time in where to get scanned is ${\rho_4 = \frac{\lambda_2}{\mu_3} = \frac {0.0788}{0.0357} = 2.208}$.
+	
+	After calculations, it's easy for us to find that both of the two systems are unstable. For the first system,  ${\rho}$ is above 1.  In other words, it means that the passengers are arriving at the sercurity check point continuously but the number of those who have finished sercurity check is low, making the queue longer and longer and the system become extremly crowded. For the second one, althougth the first two subsystems with its ${\rho}$ below 1, which can be considered stable, the last one is unstable, as its ${\rho}$ is greater than 1. This means that the last subsystem is occupied all the time and the queue is becoming longer as time goes by, which is similar to the first one.
 \section{Validating the Model}%5
 
 \section{Conclusions}%6
 
-
-\section{A Summary}%7
 
 \section{Evaluate of the Mode}%8
 
